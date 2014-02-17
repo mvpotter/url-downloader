@@ -26,3 +26,14 @@ You can provide a list of URLs to be downloaded right in command line using **-l
 place them in a configuration file (each URL on new line) and provide it using **-c** key.
 
 If destination directory is not set, files will be downloaded to "downloads" folder that is located near the script. 
+
+Module usage
+------------
+If you use url-downloader as a module, the usage is the following:
+
+```python
+# Create UrlDownloader object
+url_downloader = UrlDownloader()
+# Invoke download method
+url_downloader.download(destination_directory, list_of_links)
+```
