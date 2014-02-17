@@ -7,9 +7,14 @@ import urllib.request
 class UrlDownloader:
 
 	def download(self, dest_dir, links):
+		if links == None or len(links) == 0:
+			print ("No links to download were provided")
+			exit(2)
 		if not os.path.exists(dest_dir):
 			os.makedirs(dest_dir)
 
+		links_processed = 0
+		progress = 0
 		for link in links:
 			last_slash_index = link.rfind("/") 
 			last_dot_index = link.rfind(".") 
@@ -21,13 +26,18 @@ class UrlDownloader:
 				continue
 			downloaded_file_name = link[last_slash_index + 1:]
 			try:
-				urllib.request.urlretrieve(link, "{0}/{1}".format(dest_dir, downloaded_file_name))
-				print ("File is saved: {}".format(downloaded_file_name))
+				links_processed += 1
+				progress = int(links_processed / len(links) * 100)  
+				destination_file = "{0}/{1}".format(dest_dir, downloaded_file_name)
+				if not os.path.exists(destination_file):
+					urllib.request.urlretrieve(link, destination_file)
+					print ("{0:3d}% File is saved: {1}".format(progress, downloaded_file_name))
+				else:
+					print ("{0:3d}% The file is already exists {1}".format(progress, destination_file))
 			except ValueError as e:
 				print (e)
 			except urllib.error.HTTPError as e:
 				print ("{0} for {1}".format(e, link))
-
 			
 if __name__ == "__main__":
 	DEFAULT_DOWNLOAD_DIR = 'downloads'
@@ -50,9 +60,6 @@ if __name__ == "__main__":
 		except IOError:
 			print ("Unable to open file {}".format(args.config))
 			exit(1)	
-	if len(links) == 0:
-		print ("No links to download were provided")
-		exit(2)
 
 	url_downloader = UrlDownloader()
 	url_downloader.download(args.destination, links)
