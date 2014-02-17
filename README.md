@@ -1,6 +1,8 @@
 url-downloader
 ==============
 
+Downloads a bunch of files by their URLs.
+
 Usage
 -----
 
