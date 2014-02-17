@@ -3,7 +3,7 @@ url-downloader
 
 Downloads a bunch of files by their URLs.
 
-Usage
+Console usage
 -----
 
 ```python
@@ -29,7 +29,7 @@ If destination directory is not set, files will be downloaded to "downloads" fol
 
 Module usage
 ------------
-If you use url-downloader as a module, the usage is the following:
+If you use url-downloader as a module, usage is the following:
 
 ```python
 # Create UrlDownloader object
